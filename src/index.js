@@ -7,24 +7,57 @@ import * as serviceWorker from './serviceWorker';
 import {combineReducers,createStore} from 'redux';
 
 
-function reducer(state,action){
-  if(action.type === 'ChangeState'){
-    return action.payload.newState;
-  }
-  return 'State';
+function productsReducer(state=[],action){
+  return state;
 }
 
-const store = createStore(reducer);
+function userReducer(state='',action){
+  switch(action.type){
+    case 'updateUser':
+      return action.payload;
+  }
+  return state;
+}
+
+const allReducers =combineReducers({
+  products: productsReducer,
+  user: userReducer
+})
+
+
+const store = createStore(allReducers,
+  {
+    products:[{name:'iPhone'}],
+    user: 'Michael'
+  },
+  window.devToolsExtension && window.devToolsExtension()
+
+);
 console.log(store.getState());
-const action={
-  type: 'ChangeState',
+
+
+const updateUserAction = {
+  type: 'updateUser',
   payload:{
-    newState: 'New State'
+    user: 'John'
   }
 }
 
-store.dispatch(action)
+
+store.dispatch(updateUserAction)
 console.log(store.getState());
+
+
+
+// const action={
+//   type: 'ChangeState',
+//   payload:{
+//     newState: 'New State'
+//   }
+// }
+
+// store.dispatch(action)
+// console.log(store.getState());
 
 
 
