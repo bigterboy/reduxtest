@@ -30,7 +30,7 @@ const store = createStore(allReducers,
     products:[{name:'iPhone'}],
     user: 'Michael'
   },
-  window.devToolsExtension && window.devToolsExtension()
+  window.REDUX_DEVTOOLS_EXTENSION && window.devToolsExtension()
 
 );
 console.log(store.getState());
@@ -67,7 +67,7 @@ console.log(store.getState());
 
 
 ReactDOM.render(
-  <Provider store={store}><App /></Provider>
+  <Provider store={store}><App  aRandomProps="whatever"/></Provider>
   , document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

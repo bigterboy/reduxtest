@@ -6,21 +6,25 @@ import {updateUser} from './actions/users-action'
 
 
 
+import {bindActionCreators} from 'redux';
+
+
+
 class App extends Component {
   constructor(props){
     super(props);
     this.onUpdateUser = this.onUpdateUser.bind(this);
   }
 
-  onUpdateUser(){
-    this.props.onUpdateUser('SAMMY');
+  onUpdateUser(event){
+    this.props.onUpdateUser(event.target.value);
   }
   render() {
-    //console.log('afbcc',this.props);
+    console.log('Props:adfasdfsafdasfsa ',this.props);
     return (
       <div>
         ABC
-        <div onClick={this.onUpdateUser}>UPDATE USER</div>
+        <input onChange={this.onUpdateUser}/>
         {this.props.user}
       </div>
     );
@@ -28,16 +32,21 @@ class App extends Component {
 }
 
 
-const mapStateToProps = state=>{
+const mapStateToProps = (state,props)=>{
+  console.log("props what: ",props);
   return {
     products: state.products,
-    user: state.user
+    user: state.user,
+    userPlusProp: `${state.user} ${props.aRandomProps}`
   }
 }
 
 
-const mapActionsToProps ={
-  onUpdateUser: updateUser
+const mapActionsToProps = (dispatch,props)=>{
+  console.log("OKKKKKK",props);
+  return bindActionCreators({
+    onUpdateUser: updateUser
+  },dispatch);
 }
 
 
@@ -46,6 +55,9 @@ const mapActionsToProps ={
 //   return {products: state.products,user: state.user}
 // })(App);
 
+const mergeProps=(propsFromState,propsFromDispatch,ownProps)=>{
+  console.log("AAAAAAA: ",propsFromState,propsFromDispatch,ownProps)
+  return{};
+}
 
-
-export default connect(mapStateToProps,mapActionsToProps)(App);
+export default connect(mapStateToProps,mapActionsToProps,mergeProps)(App);
