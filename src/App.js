@@ -56,7 +56,10 @@ const mapActionsToProps = (dispatch,props)=>{
 // })(App);
 
 const mergeProps=(propsFromState,propsFromDispatch,ownProps)=>{
-  console.log("AAAAAAA: ",propsFromState,propsFromDispatch,ownProps)
+  console.log("AAAAAAA: ",propsFromState,propsFromDispatch,ownProps);
+  console.log("AAAAAAA: ",propsFromState);
+  console.log("BBBBBBB: ",propsFromDispatch);
+  console.log("CCCCCCC: ",ownProps);
   return{};
 }
 
